@@ -30,15 +30,16 @@ function urlForQueryAndPage(key, value, pageNumber) {
     page: pageNumber,
     };
     data[key] = value;
-    
+
     const querystring = Object.keys(data)
     .map(key => key + '=' + encodeURIComponent(data[key]))
     .join('&');
-    
+
     return 'https://api.nestoria.co.uk/api?' + querystring;
 }
 
-export default class SearchPage extends Component<{}> {
+type Props = {};
+export default class SearchPage extends Component<Props> {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,10 +67,9 @@ export default class SearchPage extends Component<{}> {
     _handleResponse = (response) => {
         this.setState({ isLoading: false , message: '' });
         if (response.application_response_code.substr(0, 1) === '1') {
-            this.props.navigator.push({
+            this.props.router.push.SearchResults({
                                       title: 'Results',
-                                      component: SearchResults,
-                                      passProps: {listings: response.listings}
+                                      listings: response.listings
                                       });
         } else {
             this.setState({ message: 'Location not recognized; please try again.'});
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
                                  },
                                  container: {
                                  padding: 30,
-                                 marginTop: 65,
+                                 marginTop: 100,
                                  alignItems: 'center'
                                  },
                                  flowRight: {

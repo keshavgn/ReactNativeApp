@@ -25,9 +25,9 @@ export default class PropertyDetails extends Component<{}> {
             stats += ', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1
                                                               ? 'bathrooms' : 'bathroom');
         }
-        
+
         var price = property.price_formatted.split(' ')[0];
-        
+
         return (
                 <View style={styles.container}>
                 <Image style={styles.image}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
                                  right: 0
                                  },
                                  price: {
-                                 fontSize: 25,
+                                 fontSize: 30,
                                  fontWeight: 'bold',
                                  margin: 5,
                                  color: '#48BBEC'

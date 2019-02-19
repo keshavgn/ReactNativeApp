@@ -16,14 +16,15 @@ import {
     TouchableHighlight,
     FlatList,
     Text,
+    Button,
 } from 'react-native';
 import PropertyDetails from './PropertyDetails';
 
 class ListItem extends React.PureComponent {
     _onPress = () => {
         this.props.onPressItem(this.props.index);
-    }
-    
+    };
+
     render() {
         const item = this.props.item;
         const price = item.price_formatted.split(' ')[0];
@@ -37,7 +38,8 @@ class ListItem extends React.PureComponent {
                 <View style={styles.textContainer}>
                 <Text style={styles.price}>{price}</Text>
                 <Text style={styles.title}
-                numberOfLines={1}>{item.title}</Text>
+                numberOfLines={1}>{item.title}
+                </Text>
                 </View>
                 </View>
                 <View style={styles.separator}/>
@@ -49,7 +51,10 @@ class ListItem extends React.PureComponent {
 
 export default class SearchResults extends Component<{}> {
     _keyExtractor = (item, index) => index;
-    
+    _onBackPressed = () => {
+        this.props.router.pop()
+    };
+
     _renderItem = ({item, index}) => (
                                       <ListItem
                                       item={item}
@@ -57,27 +62,56 @@ export default class SearchResults extends Component<{}> {
                                       onPressItem={this._onPressItem}
                                       />
                                       );
-    
+
     _onPressItem = (index) => {
-        this.props.navigator.push({
+        this.props.router.push.PropertyDetails({
                                   title: 'Property Details',
-                                  component: PropertyDetails,
-                                  passProps: {property: this.props.listings[index]}
+                                  property: this.props.listings[index]
                                   });
     };
-    
+
     render() {
         return (
+          <View style={styles.container}>
+            <View style={styles.navBar}>
+              <View style={styles.button}>
+                <Button
+                onPress={this._onBackPressed}
+                title='Back'
+                />
+              </View>
+              <Text style={styles.navTitle}>
+                  {this.props.title}
+              </Text>
+            </View>
                 <FlatList
                 data={this.props.listings}
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
                 />
-                );
+          </View>
+          );
     }
 }
 
 const styles = StyleSheet.create({
+  container: {
+  marginTop: 50,
+  flex: 1
+  },
+  navBar: {
+  flexDirection: 'row',
+  },
+  button: {
+  width: 60,
+  flex: 1
+  },
+  navTitle: {
+  fontSize: 30,
+  color: '#000000',
+  paddingLeft: 90,
+  flex: 4
+  },
                                  thumb: {
                                  width: 80,
                                  height: 80,
