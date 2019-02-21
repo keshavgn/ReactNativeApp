@@ -12,6 +12,7 @@
     "react-native": "0.57.5",
     "react-native-easy-router": "^2.7.7",
     "react-native-gesture-handler": "^1.0.15",
+    "react-native-maps": "^0.23.0",
     "react-navigation": "^3.3.0"
   },
   "devDependencies": {

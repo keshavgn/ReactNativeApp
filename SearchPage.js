@@ -58,7 +58,7 @@ export default class SearchPage extends Component<Props> {
         this._executeQuery(query);
     };
     static navigationOptions = {
-      title: 'Welcome!',
+      title: 'Search',
     };
 
     render() {
