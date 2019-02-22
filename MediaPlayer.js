@@ -24,6 +24,10 @@ import {
 
 
 export default class MediaPlayer extends Component <{}> {
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
     constructor(props) {
         super(props);
     }

@@ -9,7 +9,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {Platform, StyleSheet, Text, NavigatorIOS, View, TouchableHighlight, FlatList} from 'react-native';
+import {Platform, StyleSheet, Text, NavigatorIOS, View, TouchableHighlight, FlatList, Image} from 'react-native';
 
 class HomeItem extends React.PureComponent {
     _onPress = () => {
@@ -26,6 +26,9 @@ class HomeItem extends React.PureComponent {
                 <View style={styles.rowContainer}>
                 <View style={styles.textContainer}>
                 <Text style={styles.title}> {item} </Text>
+                </View>
+                <View>
+                  <Image source={require('./Resources/arrow.png')} style={styles.image}/>
                 </View>
                 </View>
                 <View style={styles.separator}/>

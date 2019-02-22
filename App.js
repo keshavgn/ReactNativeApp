@@ -8,7 +8,7 @@
 
 'use strict';
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, NavigatorIOS, View, TouchableHighlight, FlatList} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableHighlight, FlatList, Image} from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './HomeScreen';
 import SearchPage from './SearchPage';
@@ -18,7 +18,7 @@ import MediaPlayer from './MediaPlayer';
 import MapsScreen from './MapsScreen';
 
   const HomeNavigator = createStackNavigator({
-    Home: {screen: HomeScreen},
+    Home: {screen: HomeScreen },
     Map: {screen: MapsScreen},
     Search: {screen: SearchPage},
     Results: {screen: SearchResults},
@@ -32,8 +32,32 @@ import MapsScreen from './MapsScreen';
   const Settings = createAppContainer(SettingsNavigator);
 
   const TabNavigator = createBottomTabNavigator({
-    Home: Home,
-    Settings: Settings,
+    Home: {
+      screen: Home,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ tintColor }) => {
+          return <Image
+           source={require('./Resources/home.png')}
+           style={{ height: 30, width: 30}}/>;
+        },
+      })
+    },
+    Settings: {
+      screen: Settings,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ tintColor }) => {
+          return <Image
+           source={require('./Resources/more.png')}
+           style={{ height: 30, width: 30}}/>;
+        },
+      })
+    },
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'green',
+      inactiveTintColor: 'gray',
+    },
   });
 
   export default createAppContainer(TabNavigator);
