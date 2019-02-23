@@ -18,8 +18,11 @@ import {
 
 
 export default class PropertyDetails extends Component<{}> {
+  static navigationOptions = {
+     title: 'Property Details',
+   };
     render() {
-        var property = this.props.property;
+        const property = this.props.navigation.getParam('property', {});
         var stats = property.bedroom_number + ' bed ' + property.property_type;
         if (property.bathroom_number) {
             stats += ', ' + property.bathroom_number + ' ' + (property.bathroom_number > 1

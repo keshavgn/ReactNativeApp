@@ -9,26 +9,11 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Button,
-    ActivityIndicator,
-    Image,
-} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, ActivityIndicator, Image } from 'react-native';
 import SearchResults from './SearchResults';
 
 function urlForQueryAndPage(key, value, pageNumber) {
-    const data = {
-    country: 'uk',
-    pretty: '1',
-    encoding: 'json',
-    listing_type: 'buy',
-    action: 'search_listings',
-    page: pageNumber,
-    };
+    const data = { country: 'uk', pretty: '1', encoding: 'json', listing_type: 'buy', action: 'search_listings', page: pageNumber };
     data[key] = value;
 
     const querystring = Object.keys(data)
@@ -42,11 +27,7 @@ type Props = {};
 export default class SearchPage extends Component<Props> {
     constructor(props) {
         super(props);
-        this.state = {
-        searchString: 'london',
-        isLoading: false,
-        message: '',
-        };
+        this.state = { searchString: 'london', isLoading: false, message: '' };
     }
     _onSearchTextChanged = (event) => {
         console.log('_onSearchTextChanged');
@@ -67,10 +48,7 @@ export default class SearchPage extends Component<Props> {
     _handleResponse = (response) => {
         this.setState({ isLoading: false , message: '' });
         if (response.application_response_code.substr(0, 1) === '1') {
-            this.props.router.push.SearchResults({
-                                      title: 'Results',
-                                      listings: response.listings
-                                      });
+            this.props.navigation.navigate('Results', { listings: response.listings });
         } else {
             this.setState({ message: 'Location not recognized; please try again.'});
         }
@@ -79,6 +57,10 @@ export default class SearchPage extends Component<Props> {
         const query = urlForQueryAndPage('place_name', this.state.searchString, 1);
         this._executeQuery(query);
     };
+    static navigationOptions = {
+      title: 'Search',
+    };
+
     render() {
         const spinner = this.state.isLoading ?
         <ActivityIndicator size='large'/> : null;

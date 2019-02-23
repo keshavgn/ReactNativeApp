@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReactNativeApp</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDzxurRIHsV7mCrAowton1fsS2Anqf-URs</string>
 </resources>
