@@ -10,6 +10,7 @@
 
 import React, { Component } from 'react';
 import {Platform, StyleSheet, Text, NavigatorIOS, View, TouchableHighlight, FlatList, Image} from 'react-native';
+import Collections from './Resources/collection_view_response.json';
 
 class HomeItem extends React.PureComponent {
     _onPress = () => {
@@ -54,12 +55,14 @@ export default class HomeScreen extends Component {
   _onPressItem = (index) => {
     if (index == 0) {
       this.props.navigation.navigate('Search');
-    } else {
+    } if (index == 1) {
       this.props.navigation.navigate('Map');
+    } else {
+      this.props.navigation.navigate('Collections', {listings: Collections.response.listings});
     }
   };
    render() {
-     const listings = ['Search', 'Maps']; //Dic = [{title: 'Search'}]
+     const listings = ['Search', 'Maps', 'Collection View']; //Dic = [{title: 'Search'}]
        return (
                <FlatList
                data={listings}

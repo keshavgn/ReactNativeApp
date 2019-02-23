@@ -16,13 +16,15 @@ import SearchResults from './SearchResults';
 import PropertyDetails from './PropertyDetails';
 import MediaPlayer from './MediaPlayer';
 import MapsScreen from './MapsScreen';
+import CollectionScreen from './CollectionViewScreen';
 
   const HomeNavigator = createStackNavigator({
     Home: {screen: HomeScreen },
     Map: {screen: MapsScreen},
     Search: {screen: SearchPage},
     Results: {screen: SearchResults},
-    Details: {screen: PropertyDetails}
+    Details: {screen: PropertyDetails},
+    Collections: {screen: CollectionScreen}
   });
   const Home = createAppContainer(HomeNavigator);
 
